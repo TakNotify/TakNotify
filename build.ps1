@@ -1,56 +1,78 @@
-$versionPrefix = "1.0.0"
+param(
+    [Parameter()]
+    [string]$VersionPrefix = "1.0.0",
 
-$projectRoot = Join-Path $PSScriptRoot "\src\TakNotify"
-$csproj = Join-Path $projectRoot "\TakNotify.csproj"
-$outputDir = Join-Path $projectRoot "\dist"
-$tempFile = Join-Path $outputDir "\temp.txt"
+    [Parameter()]
+    [int]$BuildNumber = 0,
 
-Write-Host "Preparing resources" -ForegroundColor Yellow
+    [Parameter()]
+    [string]$OutputDir
+)
 
-if (-Not (Test-Path $outputDir -PathType Container)) {
-    New-Item -ItemType Directory -Path $outputDir
-
-    Write-Host
-    Write-Host "Output directory has been created"
+if ($OutputDir -eq [string]::Empty) {
+    $OutputDir = Join-Path $PSScriptRoot "\dist"
 }
 
-if (-Not (Test-Path $tempFile)) {
-    "0" | Out-File -FilePath $tempFile
+$needTempFile = $BuildNumber -eq 0
+$csproj = Join-Path $PSScriptRoot "\src\TakNotify\TakNotify.csproj"
+$tempFile = Join-Path $OutputDir "\temp.txt"
 
-    Write-Host
-    Write-Host "Temp file has been initialized"
+Write-Host "1. Preparing resources" -ForegroundColor Yellow
+
+if ($needTempFile) {
+    if (-Not (Test-Path $OutputDir -PathType Container)) {
+        New-Item -ItemType Directory -Path $OutputDir
+
+        Write-Host
+        Write-Host "Output directory has been created"
+    }
+
+    if (-Not (Test-Path $tempFile)) {
+        "0" | Out-File -FilePath $tempFile
+
+        Write-Host
+        Write-Host "Temp file has been initialized"
+    }
+
+    $tempContent = Get-Content $tempFile
+    $BuildNumber = [convert]::ToInt32($tempContent[0], 10)
 }
 
-$tempContent = Get-Content $tempFile
-$buildNumber = [convert]::ToInt32($tempContent[0], 10)
-$version = "$versionPrefix.$buildNumber"
-$buildOutput = Join-Path $outputDir "\$version"
+$version = "$VersionPrefix.$BuildNumber"
+$buildOutput = Join-Path $OutputDir "\$version"
 
 Write-Host
 Write-Host "All good to go. Proceeding to build v$version" -ForegroundColor Green
 
 Write-Host
-Write-Host "Restoring packages" -ForegroundColor Yellow
+Write-Host "2. Restoring packages" -ForegroundColor Yellow
 
-dotnet restore $csproj
-
-Write-Host
-Write-Host "Building the code" -ForegroundColor Yellow
-
-dotnet build $csproj --configuration Release --no-restore -p:Version=$version
+dotnet restore $csproj --verbosity normal
 
 Write-Host
-Write-Host "Publishing an artifact" -ForegroundColor Yellow
+Write-Host "3. Building the code" -ForegroundColor Yellow
+
+dotnet build $csproj --configuration Release --verbosity normal --no-restore -p:Version=$version
+
+Write-Host
+Write-Host "4. Publishing an artifact" -ForegroundColor Yellow
 
 dotnet publish $csproj --configuration Release --output $buildOutput --no-build
 
 Write-Host
-Write-Host "Finishing build" -ForegroundColor Yellow
+Write-Host "5. Packing into NuGet package" -ForegroundColor Yellow
 
-$buildNumber + 1 | Out-File -FilePath $tempFile -Force
+dotnet pack $csproj --configuration Release --output $buildOutput --no-build -p:PackageVersion=$version
 
 Write-Host
-Write-Host "Temp file has been updated"
+Write-Host "6. Finishing build" -ForegroundColor Yellow
+
+if ($needTempFile) {
+    $BuildNumber + 1 | Out-File -FilePath $tempFile -Force
+
+    Write-Host
+    Write-Host "Temp file has been updated"
+}
 
 Write-Host
 Write-Host "Finish! Please check the build output at $buildOutput" -ForegroundColor Green
