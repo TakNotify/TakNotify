@@ -1,3 +1,5 @@
+// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Licensed under the MIT License.
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;

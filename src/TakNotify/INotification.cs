@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Licensed under the MIT License.
+using System.Threading.Tasks;
 
 namespace TakNotify
 {

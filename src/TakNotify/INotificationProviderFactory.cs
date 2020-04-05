@@ -1,4 +1,6 @@
-﻿namespace TakNotify
+﻿// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Licensed under the MIT License.
+namespace TakNotify
 {
     /// <summary>
     /// The interface for notification provider factory

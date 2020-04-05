@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Licensed under the MIT License.
+using System.Collections.Generic;
 
 namespace TakNotify
 {

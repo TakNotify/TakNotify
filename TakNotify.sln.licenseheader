@@ -1,0 +1,14 @@
+extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Licensed under the MIT License.
+extensions: .aspx .ascx
+<%-- 
+Copyright (c) Frandi Dwi 2020. All rights reserved.
+Licensed under the MIT License.
+--%>
+extensions:  .xml .config .xsd
+<!--
+Copyright (c) Frandi Dwi 2020. All rights reserved.
+Licensed under the MIT License.
+-->

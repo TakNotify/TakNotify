@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Licensed under the MIT License.
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace TakNotify
