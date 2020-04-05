@@ -10,7 +10,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>taknotify;notification;dotnet-core</PackageTags>
     <Copyright>Copyright (c) Frandi Dwi 2020. All rights reserved</Copyright>
-    <PackageProjectUrl>https://github.com/TakNotify/TakNotify</PackageProjectUrl>
+    <PackageProjectUrl>https://taknotify.github.io/</PackageProjectUrl>
+    <PackageIconUrl>https://taknotify.github.io/images/icon.png</PackageIconUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
