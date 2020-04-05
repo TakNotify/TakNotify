@@ -18,6 +18,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D0C633B3-0227-4437-93C7-0153863C04EE}"
+	ProjectSection(SolutionItems) = preProject
+		docs\index.md = docs\index.md
+		docs\providers.md = docs\providers.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{48423B15-D6EE-4AB8-AE17-DF27E1BDCA21}"
+	ProjectSection(SolutionItems) = preProject
+		docs\images\speaker.png = docs\images\speaker.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +70,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2EF874BC-B6D2-45DE-9AC6-ABD9924AC3D1} = {21AA3795-F060-4B83-B7A1-A9A2281909CE}
 		{2CF496C7-4651-4471-995B-9B47A3922419} = {1527EE79-22EE-49F0-9786-F57489717E38}
+		{48423B15-D6EE-4AB8-AE17-DF27E1BDCA21} = {D0C633B3-0227-4437-93C7-0153863C04EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2356160-EF8D-4E6C-8E50-75F6E9D7A6C8}
