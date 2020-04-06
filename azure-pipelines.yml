@@ -1,0 +1,36 @@
+# Test and build TakNotify library
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+
+- task: PowerShell@2
+  displayName: 'Test'
+  inputs:
+    filePath: 'build-test.ps1'
+    failOnStderr: true
+    pwsh: true
+
+- task: PowerShell@2
+  displayName: 'Build and Pack'
+  inputs:
+    filePath: 'build.ps1'
+    arguments: '-BuildNumber $(Build.BuildId) -OutputDir $(build.artifactstagingdirectory)'
+    failOnStderr: true
+    pwsh: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
