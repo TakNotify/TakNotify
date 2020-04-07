@@ -1,8 +1,9 @@
-﻿// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Copyright (c) Frandi Dwi 2020. All rights reserved.
 // Licensed under the MIT License.
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TakNotify
@@ -13,17 +14,18 @@ namespace TakNotify
     public class Notification : INotification
     {
         private readonly ILogger<Notification> _logger;
-        private readonly INotificationProviderFactory _providerFactory;
+        private readonly List<NotificationProvider> _providers;
+
+        private static INotification _notification;
 
         /// <summary>
         /// Instantiate the <see cref="Notification"/>
         /// </summary>
         /// <param name="logger">The logger object</param>
-        /// <param name="providerFactory">The factory for the notification providers</param>
-        public Notification(ILogger<Notification> logger, INotificationProviderFactory providerFactory)
+        private Notification(ILogger<Notification> logger)
         {
             _logger = logger;
-            _providerFactory = providerFactory;
+            _providers = new List<NotificationProvider>();
         }
 
         /// <inheritdoc cref="INotification.Send(string, MessageParameterCollection)"/>
@@ -31,7 +33,7 @@ namespace TakNotify
         {
             _logger.LogDebug(LogMessages.Intro_SendingMessage, providerName);
 
-            var provider = _providerFactory.GetProvider(providerName);
+            var provider = GetProvider(providerName);
             if (provider == null)
             {
                 _logger.LogWarning(LogMessages.Failed_NoProvider, providerName);
@@ -54,5 +56,35 @@ namespace TakNotify
                 return new NotificationResult(new List<string> { ex.Message });
             }
         }
+
+        /// <inheritdoc cref="INotification.AddProvider{TProvider}(TProvider)"/>
+        public INotification AddProvider<TProvider>(TProvider provider)
+            where TProvider : NotificationProvider
+        {
+            if (!_providers.Any(p => p.Name == provider.Name))
+                _providers.Add(provider);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Get the instance <see cref="INotification"/>
+        /// </summary>
+        /// <param name="logger">The logger object</param>
+        /// <param name="reset">Create new instance</param>
+        /// <returns></returns>
+        public static INotification GetInstance(ILogger<Notification> logger, bool reset = false)
+        {
+            if (_notification == null || reset)
+                _notification = new Notification(logger);
+
+            return _notification;
+        }
+
+        private NotificationProvider GetProvider(string providerName)
+        {
+            return _providers.FirstOrDefault(p => p.Name == providerName);
+        }
+
     }
 }
