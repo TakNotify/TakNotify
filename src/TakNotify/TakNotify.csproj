@@ -4,7 +4,7 @@
     <Summary>The core library for TakNotify</Summary>
     <Description>The core library for TakNotify</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Frandi Dwi</Authors>
+    <Authors>frandi-dwi</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/TakNotify/TakNotify</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -16,7 +16,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionPrefix>1.1.0</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
