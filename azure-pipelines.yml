@@ -1,7 +1,12 @@
 # Test and build TakNotify library
 
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/*
 
 pool:
   vmImage: 'windows-latest'
