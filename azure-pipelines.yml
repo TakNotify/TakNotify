@@ -8,6 +8,8 @@ trigger:
     include:
     - src/*
 
+pr: none
+
 pool:
   vmImage: 'windows-latest'
 
