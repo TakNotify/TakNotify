@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/taknotify/TakNotify/_apis/build/status/TakNotify?branchName=master)](https://dev.azure.com/taknotify/TakNotify/_build/latest?definitionId=1&branchName=master)
+
 # TakNotify
 
 The core library of TakNotify. 
