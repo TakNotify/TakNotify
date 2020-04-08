@@ -1,0 +1,26 @@
+# Test and build TakNotify library
+
+pr:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/*
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+
+- task: PowerShell@2
+  displayName: 'Test'
+  inputs:
+    filePath: 'build-test.ps1'
+    failOnStderr: true
+    pwsh: true
