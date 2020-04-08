@@ -1,5 +1,7 @@
 # Test and build TakNotify library
 
+trigger: none
+
 pr:
   branches:
     include:
