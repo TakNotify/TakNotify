@@ -1,4 +1,5 @@
 [![Build Status](https://dev.azure.com/taknotify/TakNotify/_apis/build/status/TakNotify?branchName=master)](https://dev.azure.com/taknotify/TakNotify/_build/latest?definitionId=1&branchName=master)
+![Nuget](https://img.shields.io/nuget/v/taknotify)
 
 # TakNotify
 
