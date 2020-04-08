@@ -1,4 +1,4 @@
-$testCsproj = Join-Path $PSScriptRoot "\test\TakNotify.Test\TakNotify.Test.csproj"
+$testCsproj = Join-Path $PSScriptRoot "\test\TakNotify.Core.Test\TakNotify.Core.Test.csproj"
 
 Write-Host
 Write-Host "1. Restoring packages" -ForegroundColor Yellow
