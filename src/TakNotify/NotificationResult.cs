@@ -1,4 +1,4 @@
-﻿// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Copyright (c) Frandi Dwi 2020. All rights reserved.
 // Licensed under the MIT License.
 using System.Collections.Generic;
 
@@ -13,20 +13,27 @@ namespace TakNotify
         /// Instantiate the <see cref="NotificationResult"/>
         /// </summary>
         /// <param name="isSuccess">The success status</param>
-        public NotificationResult(bool isSuccess)
+        /// <param name="returnedValues">
+        /// Returned values when <see cref="IsSuccess"/> is <c>true</c>.
+        /// <br/>If <see cref="IsSuccess"/> is <c>false</c>, it will be ignored.
+        /// </param>
+        public NotificationResult(bool isSuccess, Dictionary<string, object> returnedValues = null)
         {
             IsSuccess = isSuccess;
             Errors = new List<string>();
+
+            if (isSuccess)
+                ReturnedValues = returnedValues ?? new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Instantiate the <see cref="NotificationResult"/> with <code>IsSuccess = false</code>
+        /// Instantiate the <see cref="NotificationResult"/> with <see cref="IsSuccess"/> is set to <c>false</c>
         /// </summary>
         /// <param name="errors">The list of errors</param>
         public NotificationResult(List<string> errors)
         {
             IsSuccess = false;
-            Errors = errors;
+            Errors = errors ?? new List<string>();
         }
 
         /// <summary>
@@ -38,5 +45,11 @@ namespace TakNotify
         /// The list of errors
         /// </summary>
         public List<string> Errors { get; }
+
+        /// <summary>
+        /// Returned values when <see cref="IsSuccess"/> is <c>true</c>.
+        /// <br/>If <see cref="IsSuccess"/> is <c>false</c>, it will be <c>null</c>
+        /// </summary>
+        public Dictionary<string, object> ReturnedValues { get; }
     }
 }
